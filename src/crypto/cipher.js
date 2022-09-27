@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const path = require('path');
 const { readCipherKeySync } = require('../crypto/keys');
 
 const dir = path.join('../../keys/', process.env(KEYS_DIR));
