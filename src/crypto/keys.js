@@ -6,20 +6,20 @@ const writeKeysSync = (dir) => {
     const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {  // Assymetric encryption -> signatures
         modulusLength: 2048,
         publicKeyEncoding: {
-          type: "pkcs1",
+          type: "spki",
           format: "pem",
         },
         privateKeyEncoding: {
-          type: "pkcs1",
-          format: "pem",
-        },
+          type: "pkcs8",
+          format: "pem"
+        }
     });
 
     const secretKey = crypto.randomBytes(16).toString('hex');  // Encrypt/decrypt with same secret key for ciphers
     
     
     fs.writeFileSync(path.join(dir, 'public.pem'), publicKey);
-    fs.writeFileSync(path.join(dir, 'private.pem'), publicKey);
+    fs.writeFileSync(path.join(dir, 'private.pem'), privateKey);
     fs.writeFileSync(path.join(dir, 'secret_key.txt'), secretKey);
 };
 
