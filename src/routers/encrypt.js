@@ -2,8 +2,6 @@ const express = require('express');
 const path = require('path');
 const { 
     encrypt,
-    decrypt,
-    isEncrypted,
     decryptJSON
 } = require('../crypto/cipher');
 
@@ -14,10 +12,11 @@ encryptRouter.post('/encrypt', (req, res) => {
         const encrypted_json = {};
         for (const key in req.body) {
             const stringified_value = JSON.stringify(req.body[key]);
-            encrypted[key] = encrypt(stringified_value);
+            encrypted_json[key] = encrypt(stringified_value);
         }
         res.status(200).send(encrypted_json)
     } catch (e) {
+        console.log(e);
         res.status(500).send();
     }
     

@@ -15,7 +15,7 @@ const writeKeysSync = (dir) => {
         },
     });
 
-    const secretKey = crypto.randomBytes(32).toString('hex');  // Encrypt/decrypt with same secret key for ciphers
+    const secretKey = crypto.randomBytes(16).toString('hex');  // Encrypt/decrypt with same secret key for ciphers
     
     
     fs.writeFileSync(path.join(dir, 'public.pem'), publicKey);
@@ -34,7 +34,8 @@ const readSignatureKeysSync = (dir) => {
 };
 
 const readCipherKeySync = (dir) => {
-    const secret_key = Buffer.from(fs.readFileSync(path.join(dir, 'secret_key.txt')), 'hex');
+    const buffer = fs.readFileSync(path.join(dir, 'secret_key.txt'));
+    const secret_key = Buffer.from(buffer.toString(), 'hex');
     return secret_key;
 }
 
