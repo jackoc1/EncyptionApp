@@ -1,0 +1,26 @@
+{
+  "name": "encryptionapp",
+  "version": "1.0.0",
+  "description": "Solution to Evervault coding challenge issued to author",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "env-cmd -f dev.env nodemon src/index.js",
+    "test": "env-cmd -f test.env jest --watch --runInBand"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "keywords": [],
+  "author": "Jack O'Connor",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "jest": "^28.1.3",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.2.4"
+  }
+}

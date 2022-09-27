@@ -1,0 +1,5 @@
+dummy = {}
+
+module.exports = {
+    dummy
+}
