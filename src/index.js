@@ -4,7 +4,7 @@ const app = require('./app');
 const { writeKeysSync } = require('./crypto/keys');
 
 if (!fs.existsSync(path.join(__dirname, '../keys/', process.env.KEYS_DIR))) {
-    fs.mkdirSync(path.join(__dirname, '../keys/', process.env.KEYS_DIR));
+    fs.mkdirSync(path.join(__dirname, '../keys/', process.env.KEYS_DIR), { recursive: true });
     writeKeysSync(path.join(__dirname, '../keys/', process.env.KEYS_DIR));
 }
 
