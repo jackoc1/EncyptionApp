@@ -22,6 +22,7 @@ signatureRouter.post('/verify', (req, res) => {
             res.status(400).send();
         }
     } catch (e) {
+        console.log(e);
         res.status(500).send();
     }
 });
