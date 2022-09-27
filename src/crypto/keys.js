@@ -24,16 +24,8 @@ const writeKeysSync = (dir) => {
 };
 
 const readSignatureKeysSync = (dir) => {
-    try {
-        const publicKeyPem = fs.readFileSync(path.join(dir, 'public.pem'));
-        const privateKeyPem = fs.readFileSync(path.join(dir, 'private.pem'));
-    } catch(e) {
-        if (e instanceof ENOENT) {
-            return undefined;
-        } else {
-            throw e;
-        }
-    }
+    const publicKeyPem = fs.readFileSync(path.join(dir, 'public.pem'));
+    const privateKeyPem = fs.readFileSync(path.join(dir, 'private.pem'));
 
     const publicKey = crypto.createPublicKey(publicKeyPem);
     const privateKey = crypto.createPrivateKey(privateKeyPem);
@@ -42,16 +34,7 @@ const readSignatureKeysSync = (dir) => {
 };
 
 const readCipherKeySync = (dir) => {
-    try {
-        const secret_key = Buffer.from(fs.readFileSync(path.join(dir, 'cipher_keys.json')), 'hex');
-    } catch(e) {
-        if (e instanceof ENOENT) {
-            return undefined;
-        } else {
-            throw e;
-        }
-    }
-
+    const secret_key = Buffer.from(fs.readFileSync(path.join(dir, 'secret_key.txt')), 'hex');
     return secretKey;
 }
 

@@ -2,12 +2,11 @@ const crypto = require('crypto');
 const path = require('path');
 const { readCipherKeySync } = require('../crypto/keys');
 
-const dir = path.join('../../keys/', process.env(KEYS_DIR));
-const secret_key = readCipherKeySync(dir);
-
+const dir = path.join(__dirname, '../../keys/', process.env.KEYS_DIR);
 const encrypted_regex = /^[A-Fa-f0-9]+:[A-Fa-f0-9]+$/;  // Match 2 hex strings separated by :
 
 const encrypt = (plain_text) => {
+    const secret_key = readCipherKeySync(dir);
     const init_vector = crypto.randomBytes(16);
     const cipher = crypto.createCipheriv('aes-128-cbc', secret_key, init_vector);
 
@@ -21,6 +20,7 @@ const encrypt = (plain_text) => {
 }
 
 const decrypt = (encrypted_hex) => {
+    const secret_key = readCipherKeySync(dir);
     const encrypted_array = encrypted_hex.split(':');
     const init_vector = Buffer.from(encrypted_array[0], 'hex');
     const encrypted = Buffer.from(encrypted_array[1], 'hex');
