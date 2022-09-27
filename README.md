@@ -1,4 +1,4 @@
-**If I've mistakenly left any info out that you require please let me know :).**
+*If I've mistakenly left any info out that you require please let me know :).*
 
 # To execute:
 ## Download required packages
@@ -16,13 +16,26 @@ node v18.9.1, can use nvm to easily switch
 npm run test
 ```
 
+Postman was also used. I had one request per endpoint. Encrypt and sign both used the dummy data for request bodys. Response data such as signature or encrypted fields would be manually copied into the postman requests for verify and decrypt. It did not seem expedient to setup some postman environment variables/scripts to fully automate the process.
+
+**Test data**
+
+```js
+{
+    "foo": "foobar",
+    "bar": {
+        "isBar": true
+    }
+}
+```
+
 ## start dev server (Postman requests are always handy)
 ```
 npm run dev
 ```
 
 # Production
-If this were to be deployed I'd use Heroku. All that is needed is to set a git remote. The port environment variable and other production env variables would be configured on the Heroku website.
+If this were to be deployed I'd use Heroku. All that is needed is to set a git remote. The port environment variable and other production env variables would be configured on the Heroku website. The entry point would be `npm run start`.
 
 
 # Other info

@@ -8,7 +8,7 @@ const { dummy_data } = require('./fixtures/reqbodys');
 
 beforeAll(() => {
     if (!fs.existsSync(path.join(__dirname, '../keys/', process.env.KEYS_DIR))) {
-        fs.mkdirSync(path.join(__dirname, '../keys/', process.env.KEYS_DIR));
+        fs.mkdirSync(path.join(__dirname, '../keys/', process.env.KEYS_DIR), { recursive: true });
         writeKeysSync(path.join(__dirname, '../keys/', process.env.KEYS_DIR));
     }
 });
