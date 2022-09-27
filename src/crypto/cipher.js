@@ -32,5 +32,26 @@ const decrypt = (encrypted_hex) => {
 }
 
 const isEncrypted = (hex) => {
-    return hex_regex.test(hex);  // This is obviously not a bulletproof solution
+    return encrypted_regex.test(hex);  // This is obviously not a bulletproof solution
+}
+
+const decryptJSON = (encypted_json) => {
+    const decrypted_json = {}
+    for (const key in encypted_json) {
+        if (isEncrypted(encypted_json[key])) {
+            const decrypted_value = decrypt(encypted_json[key]);
+            const unstringified_value = JSON.parse(decrypted_value);
+            decrypted_json[key] = unstringified_value;
+        } else {
+            decrypted_json[key] = encypted_json[key];
+        }
+    }
+    return decrypted_json;
+}
+
+module.exports = {
+    encrypt,
+    decrypt,
+    isEncrypted,
+    decryptJSON
 }
