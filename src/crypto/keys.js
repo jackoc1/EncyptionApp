@@ -13,18 +13,14 @@ const writeKeysSync = (dir) => {
           type: "pkcs1",
           format: "pem",
         },
-      });
+    });
 
-      const secretKey = crypto.randomBytes(32);
-      const initVector = crypto.randomBytes(16);
-      const cipher_keys = JSON.stringify({
-        secretKey,
-        initVector
-      });
-      
-      fs.writeFileSync(path.join(dir, 'public.pem'), publicKey);
-      fs.writeFileSync(path.join(dir, 'private.pem'), publicKey);
-      fs.writeFileSync(path.join(dir, 'cipher_keys.json'), cipher_keys);
+    const secretKey = crypto.randomBytes(32).toString('hex');  // Encrypt/decrypt with same secret key for ciphers
+    
+    
+    fs.writeFileSync(path.join(dir, 'public.pem'), publicKey);
+    fs.writeFileSync(path.join(dir, 'private.pem'), publicKey);
+    fs.writeFileSync(path.join(dir, 'secret_key.txt'), secretKey);
 };
 
 const readSignatureKeysSync = (dir) => {
@@ -45,9 +41,9 @@ const readSignatureKeysSync = (dir) => {
     return { publicKey, privateKey };
 };
 
-const readCipherKeysSync = (dir) => {
+const readCipherKeySync = (dir) => {
     try {
-        const cipher_keys = JSON.parse(fs.readFileSync(path.join(dir, 'cipher_keys.json')));
+        const secret_key = Buffer.from(fs.readFileSync(path.join(dir, 'cipher_keys.json')), 'hex');
     } catch(e) {
         if (e instanceof ENOENT) {
             return undefined;
@@ -56,14 +52,11 @@ const readCipherKeysSync = (dir) => {
         }
     }
 
-    const secretKey = Buffer.from(cipher_keys.secretKey, 'hex');
-    const initVector = Buffer.from(cipher_keys.initVector, 'hex');
-
-    return { secretKey, initVector };
+    return secretKey;
 }
 
 module.exports = {
     writeKeysSync,
     readSignatureKeysSync,
-    readCipherKeysSync
+    readCipherKeySync
 };
