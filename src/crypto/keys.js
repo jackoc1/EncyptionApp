@@ -35,7 +35,7 @@ const readSignatureKeysSync = (dir) => {
 
 const readCipherKeySync = (dir) => {
     const secret_key = Buffer.from(fs.readFileSync(path.join(dir, 'secret_key.txt')), 'hex');
-    return secretKey;
+    return secret_key;
 }
 
 module.exports = {
