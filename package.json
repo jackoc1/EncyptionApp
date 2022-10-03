@@ -1,7 +1,7 @@
 {
   "name": "encryptionapp",
   "version": "1.0.0",
-  "description": "Solution to Evervault coding challenge issued to author",
+  "description": "REST API using NodeJS crypto library",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
